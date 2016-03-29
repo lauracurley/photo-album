@@ -18,6 +18,7 @@ var AppView = Backbone.View.extend({
       collection: this.collection
     });
 
+    
     this.render();
   },
 

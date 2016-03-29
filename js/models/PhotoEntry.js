@@ -10,12 +10,17 @@ var PhotoEntry = Backbone.Model.extend({
 
   toggleFeature: function() {
     // when a photo entry view is clicked, set the feature photo
-    console.log(this);
     this.trigger('toggleFeature', this);
   },
 
-  changeRating: function(rating) {
-    this.set('rating') = rating;
+  changeRating: function(self, rating) {
+    console.log(rating);
+    this.model.set('rating', rating);
+    this.trigger('changeRating', this);
+  },
+
+  savePhoto: function() {
+    this.trigger('savePhoto', this);
   }
 
 });

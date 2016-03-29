@@ -1,11 +1,11 @@
 var InputView = Backbone.View.extend({
 
-  tagName: 'input',
-  // el: '<input>',
+  tagName: 'form',
+
   className: 'save',
 
   events: {
-    'keydown': 'keyAction'
+    'submit': 'savePhoto'
   },
 
   initialize: function() {
@@ -17,35 +17,27 @@ var InputView = Backbone.View.extend({
     return this;
   },
 
-  keyAction: function(e) {
-
-    var isEnterKey = (e.which === 13);
-
-    if(isEnterKey && !this.$el.val().trim().match(/^(?=.*[0-9].*)[0-9]{5}$/)) {
-
-      this.$el.attr({
-        placeholder: 'Sorry, zip code invalid.'
-      });
-      this.clearInput();
-
-    } else if(isEnterKey) {
-
-      this.collection.addWeatherEntry(this.$el.val());
-      this.resetInput();
-
-    }
-
+  savePhoto: function(e) {
+    var urlInput = $('#urlInput').val();
+    var titleInput = $('#titleInput').val();
+    this.collection.addPhotoEntry(urlInput, titleInput);
+    console.log('urlInput', urlInput, 'titleInput', titleInput);
+    // this.clearInput();
+    this.resetInput();
+    // this.render();
+    e.preventDefault();
   },
 
   resetInput: function() {
-    this.$el.attr({
-      placeholder: 'Enter a zip code'
-    });
     this.clearInput();
+    var titleInput = 'Title: <input id="titleInput" placeholder="Enter an image title" name="inputTitle" type="text"></input>';
+    var urlInput = 'Image Link: <input id="urlInput" placeholder="Enter image url" name="urlInput" type="text"></input>';
+    var submit = '<input type="submit" value="submit"></input>';
+    this.$el.append(titleInput + urlInput + submit);
   },
 
   clearInput: function() {
-    this.$el.val('');
+    this.$el.html('');
   }
 
 });

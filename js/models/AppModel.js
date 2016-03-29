@@ -1,38 +1,33 @@
 var PhotoEntry = Backbone.Model.extend({
 
-  defaults: {
-    title: 'Success!',
-    url: '../img/success.jpeg',
-    rating: 0
-  },
+  initialize: function(params) {
+    this.set('currentFeature', new PhotoEntry());
 
-  initialize: function() {},
+    params.library.on('play', function(song) {
+      this.set('currentSong', song);
+      console.dir(this);
+    }, this);
 
-  toggleFeature: function() {
-    // when a photo entry view is clicked, set the feature photo
-    this.trigger('toggleFeature', this);
-  },
-
-  changeRating: function(self, rating) {
-    console.log(rating);
-    this.model.set('rating', rating);
-    this.trigger('changeRating', this);
   }
-
 });
-    // var isImperial = this.get('unit') === '°F';
 
-    // if (isImperial) {
-    //   var celsius = (this.get('weather') - 32) * (5 / 9);
-    //   this.set({
-    //     'unit': '°C',
-    //     'weather': celsius.toFixed(2)
-    //   });
-    // }
-    // else {
-    //   var fahrenheit = (this.get('weather') / (5 / 9)) + 32;
-    //   this.set({
-    //     'unit': '°F',
-    //     'weather': fahrenheit.toFixed(2)
-    //   });
-    // }
+
+
+
+
+  // toggleFeature: function() {
+  //   // when a photo entry view is clicked, set the feature photo
+  //   this.trigger('toggleFeature', this);
+  // },
+
+  // changeRating: function(self, rating) {
+  //   console.log(rating);
+  //   this.model.set('rating', rating);
+  //   this.trigger('changeRating', this);
+  // }
+
+  // // this.set('currentFeature', new EntryView() );
+
+  //   // this.model.on('change: selection', function(model) {
+  //   //   this.feature.setFeature(model);
+  //   // }, this);
